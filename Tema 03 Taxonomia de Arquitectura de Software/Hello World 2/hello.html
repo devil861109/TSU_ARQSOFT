@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html th:lang="es" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml">
+    <head th:replace="common/header :: header"></head>
+    <body>
+        <div th:replace="common/body/navbar :: navbar"></div>
+        <div class="container">
+
+            <div class="col-sm-6" th:if="${contactInfo}" th:object="${contactInfo}">
+                <div class="card mt-3">
+                    <h3 class="card-header">Contacto</h3>
+                    <div class="card-block">
+                        <h4 class="card-title" th:text="*{name}"></h4>
+                        <h5 class="card-subtitle mb-4 text-muted" th:text="*{lastName}"></h5>
+                        <h6 class="card-subtitle mb-4 text-muted"><i class="fa fa-phone" aria-hidden="true"></i> [[*{phone}]]</h6>
+                        <a th:href="'mailto:' + *{email} + '?Subject=Maresme Web Developers%20Contact'" target="_top" class="card-link">Enviar email</a>
+                    </div>
+                </div>
+            </div>
+
+            <form method="post" th:action="@{/hello}" th:object="${contact}">
+                <br/>
+                <h2>Introduzca sus datos de contacto</h2>
+                <hr/>
+                <div th:class="${#fields.hasErrors('name')} ? 'form-group row has-danger' : (*{name == null} ? 'form-group row' : 'form-group row has-success')">
+                    <label for="name" class="col-sm-2 col-form-label">Nombre</label>
+                    <div class="col-sm-6">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-fw fa-user fa" aria-hidden="true"></i></span>
+                            <input th:field="*{name}" type="text" th:class="${#fields.hasErrors('name')} ? 'form-control form-control-danger' : (*{name == null} ? 'form-control' : 'form-control form-control-success')" placeholder="introduzca su nombre" required="required"/>
+                        </div>
+                        <div th:if="${#fields.hasErrors('name')}" class="form-control-feedback">El nombre debe contener entre 2 y 40 caracteres</div>
+                    </div>
+                </div>
+                <div th:class="${#fields.hasErrors('lastName')} ? 'form-group row has-danger' : (*{lastName == null} ? 'form-group row' : 'form-group row has-success')">
+                    <label for="lastName" class="col-sm-2 col-form-label">Apellido</label>
+                    <div class="col-sm-6">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-fw fa-user fa" aria-hidden="true"></i></span>
+                            <input th:field="*{lastName}" type="text" th:class="${#fields.hasErrors('lastName')} ? 'form-control form-control-danger' : (*{lastName == null} ? 'form-control' : 'form-control form-control-success')" placeholder="su primer apellido" required="required"/>
+                        </div>
+                        <div th:if="${#fields.hasErrors('lastName')}" class="form-control-feedback">El apellido debe contener entre 2 y 40 caracteres</div>
+                    </div>
+                </div>
+                <div th:class="${#fields.hasErrors('email')} ? 'form-group row has-danger' : (*{email == null} ? 'form-group row' : 'form-group row has-success')">
+                    <label for="email" class="col-sm-2 col-form-label">Email</label>
+                    <div class="col-sm-6">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-fw fa-envelope" aria-hidden="true"></i></span>
+                            <input th:field="*{email}" type="email" th:class="${#fields.hasErrors('email')} ? 'form-control form-control-danger' : (*{email == null} ? 'form-control' : 'form-control form-control-success')" placeholder="maresmewebdevelopers@gmail.com" required="required"/>
+                        </div>
+                        <div th:if="${#fields.hasErrors('email')}" class="form-control-feedback">Formato de correo eléctronico no válido</div>
+                    </div>
+                </div>
+                <div th:class="${#fields.hasErrors('phone')} ? 'form-group row has-danger' : (*{phone == null} ? 'form-group row' : 'form-group row has-success')">
+                    <label for="phone" class="col-sm-2 col-form-label">Teléfono</label>
+                    <div class="col-sm-6">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-fw fa-phone" aria-hidden="true"></i></span>
+                            <input th:field="*{phone}" type="text" th:class="${#fields.hasErrors('phone')} ? 'form-control form-control-danger' : (*{phone == null} ? 'form-control' : 'form-control form-control-success')" placeholder="su teléfono de contacto" required="required"/>
+                        </div>
+                        <div th:if="${#fields.hasErrors('phone')}" class="form-control-feedback">No se reconoce este formato de teléfono</div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-2"></div>
+                    <div class="col-sm-6">
+                        <button type="submit" class="btn btn-primary btn-md btn-block">Enviar</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div th:replace="common/body/footer :: footer"></div>
+    </body>
+</html>
