@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html th:lang="es" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml">
+    <body>
+        <div th:fragment="navbar">
+            <nav class="navbar navbar-toggleable-md navbar-light bg-faded">
+                <h1 class="navbar-brand mb-0">Hello World APP</h1>
+                <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="my-navbar-dropdown-languague" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fa fa-globe fa-lg" aria-hidden="true"></i> [[#{navbar.a.language}]]
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="my-navbar-dropdown-languague">
+                                <a class="dropdown-item" th:href="@{?lang=es}">Español</a>
+                                <a class="dropdown-item" th:href="@{?lang=en}">English</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </body>
+</html>
